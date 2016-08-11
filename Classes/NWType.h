@@ -109,10 +109,6 @@ typedef NS_ENUM(NSInteger, NWError) {
     kNWErrorSSLHandshakePeerCertExpired        = -229,
     /** SSL handshake certificate revoked. */
     kNWErrorSSLHandshakePeerCertRevoked        = -230,
-    /** SSL handshake in dark wake. */
-    kNWErrorSSLInDarkWake                      = -231,
-    /** SSL handshake connection closed via error. */
-    kNWErrorSSLHandshakeClosedAbort            = -232,
     /** SSL handshake timeout. */
     kNWErrorSSLHandshakeTimeout                = -218,
     
@@ -162,20 +158,6 @@ typedef NS_ENUM(NSInteger, NWError) {
     kNWErrorKeychainCreateIdentity             = -303,
 };
 
-typedef NS_ENUM(NSInteger, NWEnvironment) {
-    NWEnvironmentNone = 0,
-    NWEnvironmentSandbox = 1,
-    NWEnvironmentProduction = 2,
-    NWEnvironmentAuto = 3,
-};
-
-typedef NS_ENUM(NSInteger, NWEnvironmentOptions) {
-    NWEnvironmentOptionNone = 0,
-    NWEnvironmentOptionSandbox = 1 << NWEnvironmentSandbox,
-    NWEnvironmentOptionProduction = 1 << NWEnvironmentProduction,
-    NWEnvironmentOptionAny = NWEnvironmentOptionSandbox | NWEnvironmentOptionProduction
-};
-
 /** NSError dictionary key for integer code that indicates underlying reason. */
 extern NSString * const NWErrorReasonCodeKey;
 
@@ -183,11 +165,6 @@ extern NSString * const NWErrorReasonCodeKey;
  
  Most methods in this framework return `NO` or `nil` to indicate an error occurred. In that case an error object will be assigned. This class provides a mapping from codes to description string and some methods to instantiate the `NSError` object.
  */
-
-/** Returns string for given environment, for logging purposes */
-NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions);
-NSString * descriptionForEnvironent(NWEnvironment environment);
-
 @interface NWErrorUtil : NSObject
 
 /** @name Helpers */

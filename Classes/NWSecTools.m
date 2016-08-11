@@ -19,14 +19,8 @@ typedef NS_ENUM(NSInteger, NWCertType) {
     kNWCertTypeMacDevelopment = 3,
     /** OS X Production. */
     kNWCertTypeMacProduction = 4,
-    /** Simplified Certificate Handling. */
-    kNWCertTypeSimplified = 5,
-    /** Web Push Production. */
-    kNWCertTypeWebProduction = 6,
-    /** VoIP Services. */
-    kNWCertTypeVoIPServices = 7,
     /** Unknown. */
-    kNWCertTypeUnknown = 8,
+    kNWCertTypeUnknown = 5,
 };
 
 
@@ -117,31 +111,25 @@ typedef NS_ENUM(NSInteger, NWCertType) {
     return result;
 }
 
-+ (NWEnvironmentOptions)environmentOptionsForIdentity:(NWIdentityRef)identity
++ (BOOL)isSandboxIdentity:(NWIdentityRef)identity
 {
     NWCertificateRef certificate = [self certificateWithIdentity:identity error:nil];
-    return [self environmentOptionsForCertificate:certificate];
+    return [self isSandboxCertificate:certificate];
 }
 
-+ (NWEnvironmentOptions)environmentOptionsForCertificate:(NWCertificateRef)certificate
++ (BOOL)isSandboxCertificate:(NWCertificateRef)certificate
 {
     switch ([self typeWithCertificate:certificate summary:nil]) {
         case kNWCertTypeIOSDevelopment:
         case kNWCertTypeMacDevelopment:
-            return NWEnvironmentOptionSandbox;
-            
+            return YES;
         case kNWCertTypeIOSProduction:
         case kNWCertTypeMacProduction:
-            return NWEnvironmentOptionProduction;
-        case kNWCertTypeSimplified:
-        case kNWCertTypeWebProduction:
-        case kNWCertTypeVoIPServices:
-            return NWEnvironmentOptionAny;
         case kNWCertTypeNone:
         case kNWCertTypeUnknown:
             break;
     }
-    return NWEnvironmentOptionNone;
+    return NO;
 }
 
 + (BOOL)isPushCertificate:(NWCertificateRef)certificate
@@ -151,9 +139,6 @@ typedef NS_ENUM(NSInteger, NWCertType) {
         case kNWCertTypeMacDevelopment:
         case kNWCertTypeIOSProduction:
         case kNWCertTypeMacProduction:
-        case kNWCertTypeSimplified:
-        case kNWCertTypeWebProduction:
-        case kNWCertTypeVoIPServices:
             return YES;
         case kNWCertTypeNone:
         case kNWCertTypeUnknown:
@@ -169,9 +154,6 @@ typedef NS_ENUM(NSInteger, NWCertType) {
         case kNWCertTypeIOSProduction: return @"Apple Production IOS Push Services: ";
         case kNWCertTypeMacDevelopment: return @"Apple Development Mac Push Services: ";
         case kNWCertTypeMacProduction: return @"Apple Production Mac Push Services: ";
-        case kNWCertTypeSimplified: return @"Apple Push Services: ";
-        case kNWCertTypeWebProduction: return @"Website Push ID: ";
-        case kNWCertTypeVoIPServices:  return @"VoIP Services: ";
         case kNWCertTypeNone:
         case kNWCertTypeUnknown:
             break;
@@ -307,43 +289,5 @@ typedef NS_ENUM(NSInteger, NWCertType) {
     return result;
 }
 #endif
-
-#pragma mark - Deprecated
-
-+ (BOOL)isSandboxIdentity:(NWIdentityRef)identity
-{
-    return [self environmentForIdentity:identity] == NWEnvironmentSandbox;
-}
-
-+ (BOOL)isSandboxCertificate:(NWCertificateRef)certificate
-{
-    return [self environmentForCertificate:certificate] == NWEnvironmentSandbox;
-}
-
-+ (NWEnvironment)environmentForIdentity:(NWIdentityRef)identity
-{
-    NWCertificateRef certificate = [self certificateWithIdentity:identity error:nil];
-    return [self environmentForCertificate:certificate];
-}
-
-+ (NWEnvironment)environmentForCertificate:(NWCertificateRef)certificate
-{
-    switch ([self typeWithCertificate:certificate summary:nil]) {
-        case kNWCertTypeIOSDevelopment:
-        case kNWCertTypeMacDevelopment:
-            return NWEnvironmentSandbox;
-            
-        case kNWCertTypeIOSProduction:
-        case kNWCertTypeMacProduction:
-            return NWEnvironmentProduction;
-        case kNWCertTypeSimplified:
-        case kNWCertTypeWebProduction:
-        case kNWCertTypeVoIPServices:
-        case kNWCertTypeNone:
-        case kNWCertTypeUnknown:
-            break;
-    }
-    return NWEnvironmentNone;
-}
 
 @end

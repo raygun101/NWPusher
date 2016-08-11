@@ -46,11 +46,11 @@
 /** Extracts the summary string. */
 + (NSString *)summaryWithCertificate:(NWCertificateRef)certificate;
 
-/** Tells what environment options can be used with this identity (Development(sandbox)/Production server or both). */
-+ (NWEnvironmentOptions)environmentOptionsForIdentity:(NWIdentityRef)identity;
+/** Tells if the identity is for pushing to the Development (sandbox) server. */
++ (BOOL)isSandboxIdentity:(NWIdentityRef)identity;
 
-/** Tells what environment options can be used with this certificate (Development(sandbox)/Production server or both). */
-+ (NWEnvironmentOptions)environmentOptionsForCertificate:(NWCertificateRef)certificate;
+/** Tells if the certificate is for pushing to the Development (sandbox) server. */
++ (BOOL)isSandboxCertificate:(NWCertificateRef)certificate;
 
 /** Tells if the certificate can be used for connecting with APNs. */
 + (BOOL)isPushCertificate:(NWCertificateRef)certificate;
@@ -65,12 +65,5 @@
 /** Extracts given properties of certificate, see `SecCertificateOIDs.h`, use `nil` to get all. */
 + (NSDictionary *)valuesWithCertificate:(NWCertificateRef)certificate keys:(NSArray *)keys error:(NSError **)error;
 #endif
-
-// deprecated
-
-+ (BOOL)isSandboxIdentity:(NWIdentityRef)identity __deprecated;
-+ (BOOL)isSandboxCertificate:(NWCertificateRef)certificate __deprecated;
-+ (NWEnvironment)environmentForIdentity:(NWIdentityRef)identity;
-+ (NWEnvironment)environmentForCertificate:(NWCertificateRef)certificate;
 
 @end

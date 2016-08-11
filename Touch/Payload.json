@@ -1,0 +1,18 @@
+{
+    "aps":
+    {
+        "content-available":"1",
+        "sound":"sms",
+        "alert":
+        {
+            "body":"You have no money left",
+            "action-loc-key":"View"
+        },
+    },
+    "a":"1",
+    "b":"fester.push.ack",
+    "c":"inContact_1432642403822",
+    "uiid":"ui.sms.push.view.inContact",
+    "parent":"inContact",
+    "type": "sms"
+}

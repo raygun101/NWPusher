@@ -32,18 +32,18 @@
 /** @name Initialization */
 
 /** Creates, connects and returns a pusher object based on the provided identity. */
-+ (instancetype)connectWithIdentity:(NWIdentityRef)identity environment:(NWEnvironment)environment error:(NSError **)error;
++ (instancetype)connectWithIdentity:(NWIdentityRef)identity error:(NSError **)error;
 
 /** Creates, connects and returns a pusher object based on the PKCS #12 data. */
-+ (instancetype)connectWithPKCS12Data:(NSData *)data password:(NSString *)password environment:(NWEnvironment)environment error:(NSError **)error;
++ (instancetype)connectWithPKCS12Data:(NSData *)data password:(NSString *)password error:(NSError **)error;
 
 /** @name Connecting */
 
 /** Connect with the APNs using the identity. */
-- (BOOL)connectWithIdentity:(NWIdentityRef)identity environment:(NWEnvironment)environment error:(NSError **)error;
+- (BOOL)connectWithIdentity:(NWIdentityRef)identity error:(NSError **)error;
 
 /** Connect with the APNs using the identity from PKCS #12 data. */
-- (BOOL)connectWithPKCS12Data:(NSData *)data password:(NSString *)password environment:(NWEnvironment)environment error:(NSError **)error;
+- (BOOL)connectWithPKCS12Data:(NSData *)data password:(NSString *)password error:(NSError **)error;
 
 /** Reconnect using the same identity, disconnects if necessary. */
 - (BOOL)reconnectWithError:(NSError **)error;
@@ -66,12 +66,5 @@
 
 /** Read back multiple notification identifiers of, up to max, failed pushes. */
 - (NSArray *)readFailedIdentifierErrorPairsWithMax:(NSUInteger)max error:(NSError **)error;
-
-// deprecated
-
-+ (instancetype)connectWithIdentity:(NWIdentityRef)identity error:(NSError **)error __deprecated;
-+ (instancetype)connectWithPKCS12Data:(NSData *)data password:(NSString *)password error:(NSError **)error __deprecated;
-- (BOOL)connectWithIdentity:(NWIdentityRef)identity error:(NSError **)error __deprecated;
-- (BOOL)connectWithPKCS12Data:(NSData *)data password:(NSString *)password error:(NSError **)error __deprecated;
 
 @end

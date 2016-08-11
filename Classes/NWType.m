@@ -9,28 +9,6 @@
 
 NSString * const NWErrorReasonCodeKey = @"NWErrorReasonCodeKey";
 
-NSString * descriptionForEnvironentOptions(NWEnvironmentOptions environmentOptions)
-{
-    switch (environmentOptions) {
-        case NWEnvironmentOptionNone: return @"No environment";
-        case NWEnvironmentOptionSandbox: return @"Sandbox";
-        case NWEnvironmentOptionProduction: return @"Production";
-        case NWEnvironmentOptionAny: return @"Sandbox|Production";
-    }
-    return nil;
-}
-
-NSString * descriptionForEnvironent(NWEnvironment environment)
-{
-    switch (environment) {
-        case NWEnvironmentNone: return @"none";
-        case NWEnvironmentProduction: return @"production";
-        case NWEnvironmentSandbox: return @"sandbox";
-        case NWEnvironmentAuto: return @"auto";
-    }
-    return nil;
-}
-
 @implementation NWErrorUtil
 
 + (NSString *)stringWithCode:(NWError)code
@@ -79,8 +57,6 @@ NSString * descriptionForEnvironent(NWEnvironment environment)
         case kNWErrorSSLHandshakeServerAuthCompleted   : return @"SSL handshake auth interrupted";
         case kNWErrorSSLHandshakePeerCertExpired       : return @"SSL handshake certificate expired";
         case kNWErrorSSLHandshakePeerCertRevoked       : return @"SSL handshake certificate revoked";
-        case kNWErrorSSLInDarkWake                     : return @"SSL handshake in dark wake";
-        case kNWErrorSSLHandshakeClosedAbort           : return @"SSL handshake connection closed via error";
         case kNWErrorSSLHandshakeTimeout               : return @"SSL handshake timeout";
             
         case kNWErrorReadDroppedByServer               : return @"Read connection dropped by server";

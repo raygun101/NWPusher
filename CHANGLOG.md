@@ -3,23 +3,6 @@ Change Log
 
 ### master (unreleased)
 
-### 0.7.2 (2016-07-19)
-
-* Added support for Carthage, thanks to @zats
-
-### 0.7.1 (2016-04-27)
-
-* Remove Mac enum from Touch target
-
-### 0.7.0 (2016-01-07)
-
-* Add support for simplified certificates (pull request by 666tos)
-
-### 0.6.4 (2015-12-20)
-
-* Add support for new certificate types (web, simplified, voip)
-* Add support for handshake errors (dark wake and closed abort)
-
 ### 0.6.3 (2015-01-22)
 
 * Add certificate expiration date to listing
